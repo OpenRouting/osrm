@@ -47,6 +47,7 @@ if node['osrm']['limited_ram']
     cwd "/"
     action :nothing
   end
+end
 
 # define tasks
 directory "#{node['osrm']['target']}/build" do
@@ -95,3 +96,4 @@ if node['osrm']['limited_ram']
     cwd "/"
     action :nothing
   end
+end

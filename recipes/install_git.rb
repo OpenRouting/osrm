@@ -32,6 +32,22 @@ package 'libosmpbf-dev'
 package 'libprotoc-dev'
 
 
+if node['osrm']['limited_ram']
+  execute 'dd if=/dev/zero of=/swapfile bs=64M count=16' do
+    cwd "/"
+    action :nothing
+  end
+
+  execute 'mkswap /swapfile' do
+    cwd "/"
+    action :nothing
+  end
+
+  execute 'swapon /swapfile' do
+    cwd "/"
+    action :nothing
+  end
+
 # define tasks
 directory "#{node['osrm']['target']}/build" do
   action :nothing
@@ -68,3 +84,14 @@ end
     to "#{node['osrm']['target']}/build/#{binary}"
   end
 end
+
+if node['osrm']['limited_ram']
+  execute 'swapoff /swapfile' do
+    cwd "/"
+    action :nothing
+  end
+
+  execute 'sudo rm /swapfile' do
+    cwd "/"
+    action :nothing
+  end

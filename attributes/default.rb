@@ -25,3 +25,5 @@ default['osrm']['target'] = '/opt/osrm'
 default['osrm']['map_dir'] = '/opt/osrm-data'
 
 default['osrm']['threads'] = node['cpu']['total']
+
+default['osrm']['limited_ram'] = true
